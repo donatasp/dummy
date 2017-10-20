@@ -29,6 +29,12 @@ jobs:
       - run: yarn install
       - run: yarn build
 
+      - run:
+          name: zip artifacts
+          command: zip -r ./dist.zip ./dist
+      - store_artifacts:
+          path: ./dist.zip
+
       - save_cache:
           paths:
             - node_modules
