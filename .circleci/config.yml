@@ -53,7 +53,7 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               git push heroku master
-              heroku run mkdir dist && cd dist && wget https://s3-eu-west-1.amazonaws.com/oberlo-artifacts/dist_$CIRCLE_SHA1.zip && unzip dist_$CIRCLE_SHA1.zip
+              heroku run wget https://s3-eu-west-1.amazonaws.com/oberlo-artifacts/dist_$CIRCLE_SHA1.zip && unzip dist_$CIRCLE_SHA1.zip
             fi
 
 
