@@ -50,10 +50,10 @@ jobs:
             - "38:62:39:c4:f7:1a:12:f3:af:e3:55:88:bd:28:17:f2"
       - deploy:
           name: Deploy Master to Heroku
+              # heroku run wget https://s3-eu-west-1.amazonaws.com/oberlo-artifacts/dist_$CIRCLE_SHA1.zip && unzip -o dist_$CIRCLE_SHA1.zip
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               git push heroku master
-              heroku run wget https://s3-eu-west-1.amazonaws.com/oberlo-artifacts/dist_$CIRCLE_SHA1.zip && unzip -o dist_$CIRCLE_SHA1.zip
             fi
 
 
