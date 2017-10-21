@@ -34,8 +34,7 @@ jobs:
           command: zip -r ./dist.zip ./dist
       - run:
           name: install awscli
-          command: apt-get install awscli
-#          command: aws s3 cp ./dist.zip s3://oberlo-artefacts/dist.zip
+          command: aws s3 cp ./dist.zip s3://oberlo-artefacts/dist.zip
 
       - save_cache:
           paths:
