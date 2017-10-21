@@ -43,8 +43,8 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      steps:
-        - deploy
+
+      - deployment
         deployment:
           prod:
             branch: master
