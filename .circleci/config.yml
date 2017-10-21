@@ -34,7 +34,8 @@ jobs:
           command: zip -r ./dist.zip ./dist
       - run:
           name: upload to s3
-          command: npm install aws-sdk && aws s3 cp ./dist.zip s3://oberlo-artefacts/dist.zip
+#          command: npm install aws-sdk && aws s3 cp ./dist.zip s3://oberlo-artefacts/dist.zip
+          command: uname
 
       - save_cache:
           paths:
