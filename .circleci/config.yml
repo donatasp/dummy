@@ -3,6 +3,12 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+deployment:
+  prod:
+    branch: master
+    heroku:
+      appname: dummy-artifacts
+      
 jobs:
   build:
     docker:
@@ -43,11 +49,5 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
-  deployment:
-    prod:
-      branch: master
-      heroku:
-        appname: dummy-artifacts
 
 
