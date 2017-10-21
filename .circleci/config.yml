@@ -31,7 +31,7 @@ jobs:
 
       - run:
           name: zip artifacts
-          command: zip -r ./dist.zip ./dist
+          command: zip -r ./dist_{{ echo $CIRCLE_SHA1 }}.zip ./dist
       - run:
           name: Install dependencies
           working_directory: /
@@ -39,7 +39,7 @@ jobs:
             sudo apt-get -y -qq install awscli
       - run:
           name: uploading artifacts
-          command: aws s3 cp ./dist.zip s3://oberlo-artifacts/dist.zip
+          command: aws s3 cp ./dist.zip s3://oberlo-artifacts/dist_{{ echo $CIRCLE_SHA1 }}.zip
 
       - save_cache:
           paths:
