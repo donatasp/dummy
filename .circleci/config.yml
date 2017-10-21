@@ -44,11 +44,10 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - deployment
-        deployment:
-          prod:
-            branch: master
-            heroku:
-              appname: dummy-artifacts
+  deployment:
+    prod:
+      branch: master
+      heroku:
+        appname: dummy-artifacts
 
 
