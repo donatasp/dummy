@@ -44,8 +44,16 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
-      #- run: yarn test
+      - run: bash .circleci/setup-heroku.sh
+        - add_ssh_keys:
+            fingerprints:
+              - "08:28:bd:8f:c2:ee:74:9f:b8:c4:84:73:61:25:de:b8"
+        - deploy:
+            name: Deploy Master to Heroku
+            command: |
+              if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                git push heroku master
+              fi
 
 
 
