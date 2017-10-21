@@ -34,9 +34,8 @@ jobs:
           command: zip -r ./dist.zip ./dist
       - run:
           name: install awscli
-          command: curl -O https://bootstrap.pypa.io/get-pip.py
-#          command: npm install aws-sdk && aws s3 cp ./dist.zip s3://oberlo-artefacts/dist.zip
-          command: echo ${CIRCLE_SHA1}
+          command: apt-get install awscli
+#          command: aws s3 cp ./dist.zip s3://oberlo-artefacts/dist.zip
 
       - save_cache:
           paths:
