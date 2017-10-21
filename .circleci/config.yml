@@ -3,12 +3,8 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
-deployment:
-  prod:
-    branch: master
-    heroku:
-      appname: dummy-artifacts
-      
+
+
 jobs:
   build:
     docker:
@@ -49,5 +45,16 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: bash .circleci/setup-heroku.sh
+        - add_ssh_keys:
+          fingerprints:
+            - "38:62:39:c4:f7:1a:12:f3:af:e3:55:88:bd:28:17:f2"
+        - deploy:
+          name: Deploy Master to Heroku
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              git push heroku master
+            fi
 
 
