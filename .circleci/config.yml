@@ -38,8 +38,8 @@ jobs:
           command: |
             sudo apt-get -y -qq install awscli
       - run:
-          name: install awscli
-          command: aws s3 cp ./dist.zip s3://oberlo-artefacts/dist.zip
+          name: uploading artifacts
+          command: aws s3 cp ./dist.zip s3://oberlo-artifacts/dist.zip
 
       - save_cache:
           paths:
