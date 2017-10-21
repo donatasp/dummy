@@ -34,7 +34,7 @@ jobs:
           command: zip -r ./dist_$CIRCLE_SHA1.zip ./dist
       - run:
           name: Install dependencies
-          command: sudo apt-get -y -qq install awscli && wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+          command: sudo apt-get -y -qq install awscli
       - run:
           name: uploading artifacts
           command: aws s3 cp ./dist_$CIRCLE_SHA1.zip s3://oberlo-artifacts/dist_$CIRCLE_SHA1.zip
