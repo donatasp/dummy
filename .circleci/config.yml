@@ -36,7 +36,7 @@ jobs:
           name: install awscli
           command: curl -O https://bootstrap.pypa.io/get-pip.py
 #          command: npm install aws-sdk && aws s3 cp ./dist.zip s3://oberlo-artefacts/dist.zip
-          command: echo ${AWS_DEFAULT_REGION}
+          command: echo ${CIRCLE_SHA1}
 
       - save_cache:
           paths:
