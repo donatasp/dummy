@@ -33,6 +33,15 @@ jobs:
           name: zip artifacts
           command: zip -r ./dist.zip ./dist
       - run:
+          name: Install dependencies
+          working_directory: /
+          command: |
+            apt-get -y -qq update
+            apt-get -y -qq install python3.4-dev
+            curl -O https://bootstrap.pypa.io/get-pip.py
+            python3.4 get-pip.py --user
+            pip install awscli --upgrade --user
+      - run:
           name: install awscli
           command: aws s3 cp ./dist.zip s3://oberlo-artefacts/dist.zip
 
