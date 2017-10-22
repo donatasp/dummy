@@ -7,12 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:7.10
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
+      - image: donatasp/oberlo-style-guide
 
     working_directory: ~/repo
 
@@ -33,9 +28,6 @@ jobs:
           name: zip artifacts
           command: zip -r ./dist_$CIRCLE_SHA1.zip ./dist
       - run:
-          name: Install dependencies
-          command: sudo apt-get -y -qq install awscli
-      - run:
           name: uploading artifacts
           command: aws s3 cp ./dist_$CIRCLE_SHA1.zip s3://oberlo-artifacts/dist_$CIRCLE_SHA1.zip
 
@@ -50,7 +42,6 @@ jobs:
             - "38:62:39:c4:f7:1a:12:f3:af:e3:55:88:bd:28:17:f2"
       - deploy:
           name: Deploy Master to Heroku
-              # heroku run wget https://s3-eu-west-1.amazonaws.com/oberlo-artifacts/dist_$CIRCLE_SHA1.zip && unzip -o dist_$CIRCLE_SHA1.zip
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               git push heroku master
