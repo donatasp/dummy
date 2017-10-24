@@ -25,11 +25,18 @@ jobs:
       - run: yarn build
 
       - run:
-          name: zip artifacts
-          command: zip -r ./dist_$CIRCLE_SHA1.zip ./dist
+          name: zip artifacts (only for master)
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              zip -r ./dist_$CIRCLE_SHA1.zip ./dist
+            fi
+
       - run:
-          name: uploading artifacts
-          command: aws s3 cp ./dist_$CIRCLE_SHA1.zip s3://oberlo-artifacts/dist_$CIRCLE_SHA1.zip
+          name: uploading artifacts (only for master)
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              aws s3 cp ./dist_$CIRCLE_SHA1.zip s3://oberlo-artifacts/dummy/dist_$CIRCLE_SHA1.zip
+            fi
 
       - save_cache:
           paths:
