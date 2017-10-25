@@ -9,7 +9,7 @@
     "start": "node server.js",
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
-    "heroku-postbuild": "wget -qO- https://s3-eu-west-1.amazonaws.com/oberlo-artifacts/oberlo-style-guide/dist_$SOURCE_VERSION.tar.gz && tar xvz",
+    "heroku-postbuild": "wget -qO- https://s3-eu-west-1.amazonaws.com/oberlo-artifacts/oberlo-style-guide/dist_$SOURCE_VERSION.tar.gz && tar xvz dist_$SOURCE_VERSION.tar.gz",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
