@@ -24,20 +24,6 @@ jobs:
       - run: yarn install
       - run: yarn build
 
-      - run:
-          name: zip artifacts (only for master)
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              zip -r ./dist_$CIRCLE_SHA1.zip ./dist
-            fi
-
-      - run:
-          name: uploading artifacts (only for master)
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              aws s3 cp ./dist_$CIRCLE_SHA1.zip s3://oberlo-artifacts/dummy/dist_$CIRCLE_SHA1.zip
-            fi
-
       - save_cache:
           paths:
             - node_modules
@@ -51,7 +37,7 @@ jobs:
           name: Deploy Master to Heroku
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              git push heroku master
+              bash .circleci/deploy.sh
             fi
 
 
